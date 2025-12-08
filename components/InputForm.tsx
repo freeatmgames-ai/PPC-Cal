@@ -26,9 +26,9 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
           <label className="block text-sm font-bold text-gray-800 mb-2">
             New Base Bid (₹)
           </label>
-          <div className="relative rounded-md shadow-sm">
+          <div className="relative rounded-md shadow-sm group">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <IndianRupee className="h-5 w-5 text-gray-400" />
+              <IndianRupee className="h-5 w-5 text-gray-500 group-focus-within:text-amazon-orange transition-colors" />
             </div>
             <input
               type="number"
@@ -36,23 +36,24 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
               step="0.01"
               value={values.baseBid || ''}
               onChange={handleChange('baseBid')}
-              className="block w-full rounded-md border-gray-300 pl-10 py-3 text-lg focus:border-amazon-blue focus:ring-amazon-blue border bg-white text-gray-900 placeholder-gray-300 transition-colors shadow-sm"
+              className="block w-full rounded-md border-gray-300 pl-10 py-3 text-lg focus:border-amazon-orange focus:ring-amazon-orange border bg-white text-gray-900 placeholder-gray-400 transition-shadow shadow-sm"
               placeholder="0.00"
             />
           </div>
+          <p className="mt-1 text-xs text-gray-500">The default bid for 'Rest of Search'.</p>
         </div>
 
         {/* Placements Group */}
-        <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-4">
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-            Placement Adjustments
+        <div className="bg-slate-50 rounded-xl p-5 border border-gray-200 space-y-4">
+          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 border-b border-gray-200 pb-2">
+            Placement Modifiers
           </h3>
 
           {/* Rest of Search (Locked) */}
-          <div className="opacity-75">
+          <div className="opacity-80">
             <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center justify-between">
               <span>Rest of Search</span>
-              <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Base</span>
+              <span className="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-0.5 rounded">0%</span>
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -62,7 +63,7 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
                 type="text"
                 disabled
                 value="0"
-                className="block w-full rounded-md border-gray-200 bg-gray-100 pl-10 py-2 text-gray-500 sm:text-sm border cursor-not-allowed"
+                className="block w-full rounded-md border-gray-200 bg-gray-100 pl-10 py-2 text-gray-500 sm:text-sm border cursor-not-allowed font-medium"
               />
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                 <Lock className="h-3 w-3 text-gray-400" />
@@ -75,9 +76,9 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
             <label className="block text-sm font-medium text-amazon-dark mb-1">
               Top of Search (TOS) %
             </label>
-            <div className="relative rounded-md shadow-sm">
+            <div className="relative rounded-md shadow-sm group">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Percent className="h-4 w-4 text-amazon-orange" />
+                <Percent className="h-4 w-4 text-amazon-orange group-focus-within:text-amazon-dark transition-colors" />
               </div>
               <input
                 type="number"
@@ -85,7 +86,7 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
                 max="900"
                 value={values.tosPercentage || ''}
                 onChange={handleChange('tosPercentage')}
-                className="block w-full rounded-md border-gray-300 pl-10 py-2.5 focus:border-amazon-blue focus:ring-amazon-blue sm:text-sm border bg-white text-gray-900 shadow-sm"
+                className="block w-full rounded-md border-gray-300 pl-10 py-2.5 focus:border-amazon-blue focus:ring-amazon-blue sm:text-sm border bg-white text-gray-900 shadow-sm transition-all"
                 placeholder="0"
               />
             </div>
@@ -96,9 +97,9 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
             <label className="block text-sm font-medium text-amazon-dark mb-1">
               Product Pages (PP) %
             </label>
-            <div className="relative rounded-md shadow-sm">
+            <div className="relative rounded-md shadow-sm group">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Percent className="h-4 w-4 text-amazon-blue" />
+                <Percent className="h-4 w-4 text-amazon-blue group-focus-within:text-amazon-dark transition-colors" />
               </div>
               <input
                 type="number"
@@ -106,7 +107,7 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
                 max="900"
                 value={values.ppPercentage || ''}
                 onChange={handleChange('ppPercentage')}
-                className="block w-full rounded-md border-gray-300 pl-10 py-2.5 focus:border-amazon-blue focus:ring-amazon-blue sm:text-sm border bg-white text-gray-900 shadow-sm"
+                className="block w-full rounded-md border-gray-300 pl-10 py-2.5 focus:border-amazon-blue focus:ring-amazon-blue sm:text-sm border bg-white text-gray-900 shadow-sm transition-all"
                 placeholder="0"
               />
             </div>
