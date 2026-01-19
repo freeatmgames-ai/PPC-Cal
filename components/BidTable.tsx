@@ -36,6 +36,11 @@ export const BidTable: React.FC<BidTableProps> = ({ data }) => {
     calculateRow(PlacementType.PRODUCT_PAGES, ppPercentage),
   ];
 
+  // Calculate Totals
+  const totalSpend = rows.reduce((sum, row) => sum + row.adSpend, 0);
+  const overallAcos = targetSales > 0 ? (totalSpend / targetSales) * 100 : null;
+  const totalClicks = estimatedClicks * rows.length;
+
   const getAcosColor = (acos: number | null) => {
     if (acos === null) return 'bg-gray-100 text-gray-600';
     if (acos <= 15) return 'bg-green-100 text-green-800 border-green-200';
@@ -48,7 +53,7 @@ export const BidTable: React.FC<BidTableProps> = ({ data }) => {
       <div className="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
         <h2 className="text-lg font-semibold text-amazon-dark">Bid & Spend Simulation</h2>
         <span className="text-xs font-medium text-gray-500 bg-gray-200 px-2 py-1 rounded">
-          {estimatedClicks} Clicks Baseline
+          {estimatedClicks} Clicks per Placement
         </span>
       </div>
       <div className="overflow-x-auto">
@@ -94,6 +99,29 @@ export const BidTable: React.FC<BidTableProps> = ({ data }) => {
               </tr>
             ))}
           </tbody>
+          <tfoot className="bg-slate-900 text-white">
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-bold">Total Projection</div>
+                <div className="text-xs text-slate-400">Sum of all placements ({totalClicks} clicks)</div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-right text-xs text-slate-400 italic">
+                Combined Impact
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-right font-bold text-amazon-orange text-lg">
+                ₹{totalSpend.toFixed(2)}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-right">
+                {overallAcos !== null ? (
+                  <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-black shadow-inner border ${getAcosColor(overallAcos)}`}>
+                    OVERALL: {overallAcos.toFixed(1)}%
+                  </span>
+                ) : (
+                  <span className="text-xs text-slate-400">N/A</span>
+                )}
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
