@@ -2,6 +2,8 @@ export interface BidState {
   baseBid: number;
   tosPercentage: number;
   ppPercentage: number;
+  estimatedClicks: number;
+  targetSales: number;
 }
 
 export interface CalculationRow {
@@ -9,7 +11,8 @@ export interface CalculationRow {
   adjustment: number;
   formula: string;
   finalBid: number;
-  isHigh?: boolean;
+  adSpend: number;
+  acos: number | null;
 }
 
 export enum PlacementType {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BidState } from '../types';
-import { IndianRupee, Percent, Lock } from 'lucide-react';
+import { IndianRupee, Percent, Lock, MousePointerClick, ShoppingBag } from 'lucide-react';
 
 interface InputFormProps {
   values: BidState;
@@ -17,7 +17,7 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
     <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-xl font-bold text-amazon-dark mb-6 flex items-center gap-2">
         <span className="w-1 h-6 bg-amazon-orange rounded-full block"></span>
-        Configuration
+        Bid Settings
       </h2>
       
       <div className="space-y-6">
@@ -40,41 +40,63 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
               placeholder="0.00"
             />
           </div>
-          <p className="mt-1 text-xs text-gray-500">The default bid for 'Rest of Search'.</p>
+        </div>
+
+        {/* Performance Forecasting */}
+        <div className="bg-indigo-50/50 rounded-xl p-5 border border-indigo-100 space-y-4">
+          <h3 className="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2 border-b border-indigo-200 pb-2 flex items-center gap-2">
+            Performance Forecasting
+          </h3>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-gray-600 mb-1">
+                Est. Clicks
+              </label>
+              <div className="relative rounded-md shadow-sm group">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+                  <MousePointerClick className="h-4 w-4 text-indigo-500" />
+                </div>
+                <input
+                  type="number"
+                  min="1"
+                  value={values.estimatedClicks || ''}
+                  onChange={handleChange('estimatedClicks')}
+                  className="block w-full rounded-md border-gray-300 pl-8 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 border bg-white text-gray-900"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-xs font-bold text-gray-600 mb-1">
+                Target Sales (₹)
+              </label>
+              <div className="relative rounded-md shadow-sm group">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+                  <ShoppingBag className="h-4 w-4 text-indigo-500" />
+                </div>
+                <input
+                  type="number"
+                  min="0"
+                  value={values.targetSales || ''}
+                  onChange={handleChange('targetSales')}
+                  className="block w-full rounded-md border-gray-300 pl-8 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 border bg-white text-gray-900"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Placements Group */}
         <div className="bg-slate-50 rounded-xl p-5 border border-gray-200 space-y-4">
           <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 border-b border-gray-200 pb-2">
-            Placement Modifiers
+            Placement Modifiers (%)
           </h3>
-
-          {/* Rest of Search (Locked) */}
-          <div className="opacity-80">
-            <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center justify-between">
-              <span>Rest of Search</span>
-              <span className="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-0.5 rounded">0%</span>
-            </label>
-            <div className="relative rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Percent className="h-4 w-4 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                disabled
-                value="0"
-                className="block w-full rounded-md border-gray-200 bg-gray-100 pl-10 py-2 text-gray-500 sm:text-sm border cursor-not-allowed font-medium"
-              />
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <Lock className="h-3 w-3 text-gray-400" />
-              </div>
-            </div>
-          </div>
 
           {/* Top of Search */}
           <div>
             <label className="block text-sm font-medium text-amazon-dark mb-1">
-              Top of Search (TOS) %
+              Top of Search (TOS)
             </label>
             <div className="relative rounded-md shadow-sm group">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -95,7 +117,7 @@ export const InputForm: React.FC<InputFormProps> = ({ values, onChange }) => {
           {/* Product Pages */}
           <div>
             <label className="block text-sm font-medium text-amazon-dark mb-1">
-              Product Pages (PP) %
+              Product Pages (PP)
             </label>
             <div className="relative rounded-md shadow-sm group">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
